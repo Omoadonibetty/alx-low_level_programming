@@ -20,15 +20,15 @@ int _atoi(char *s)
 		
 {
 		
-	int i, j, k, len, f, digit;
+	int i, d, n, len, f, digit;
 		
 
 		
 	i = 0;
 		
-	j = 0;
+	d = 0;
 		
-	k = 0;
+	n = 0;
 		
 	len = 0;
 		
@@ -50,7 +50,7 @@ int _atoi(char *s)
 		
 		if (s[i] == '-')
 		
-			++j;
+			++d;
 		
 
 		
@@ -60,11 +60,11 @@ int _atoi(char *s)
 		
 			digit = s[i] - '0';
 		
-			if (j % 2)
+			if (d % 2)
 		
 				digit = -digit;
 		
-			n = k * 10 + digit;
+			n = n * 10 + digit;
 		
 			f = 1;
 		
@@ -88,7 +88,7 @@ int _atoi(char *s)
 		
 
 		
-	return (k);
+	return (n);
 		
 }
 		
