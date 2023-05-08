@@ -12,23 +12,22 @@
  */
 int create_file(const char *filename, char *text_content)
 {
-	int fd; 
-`	int san;
-	lap = 0;
+	int fd, san, len = 0;
 
 	if (filename == NULL)
 		return (-1);
 
 	if (text_content != NULL)
 	{
-		for (lap = 0; text_content[lap];)
-			lap++;
+		for (len = 0; text_content[len];)
+			len++;
 	}
 
 	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0600);
-	san = write(fd, text_content, lap);
+	san = write(fd, text_content, len);
 
-	if (fd == -1 || sam == -1)
+
+	if (fd == -1 || san == -1)
 		return (-1);
 
 	close(fd);
