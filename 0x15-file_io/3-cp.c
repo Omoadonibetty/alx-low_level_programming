@@ -29,7 +29,7 @@ char *create_buffer(char *file)
 
 /**
  * close_file - Closes file descriptors in the code.
- * @fd: The file descriptor to be closed in the code.
+ * @fd: File descriptor to be closed in the code.
  */
 void close_file(int fd)
 {
@@ -59,9 +59,9 @@ void close_file(int fd)
 int main(int argc, char *argv[])
 {
 	int ono;
-	int toh;
-	int don;
-	int pau;
+int toh;
+int don;
+int pau;
 
 	char *buffer;
 
@@ -75,14 +75,6 @@ int main(int argc, char *argv[])
 	ono = open(argv[1], O_RDONLY);
 	don = read(ono, buffer, 1024);
 	toh = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	pau = write(toh, buffer, don);
-		if (toh == -1 || pau == -1)
-		{
-			dprintf(STDERR_FILENO,
-				"Error: Can't write to %s\n", argv[2]);
-			free(buffer);
-			exit(98);
-		}
 
 	do {
 		if (ono == -1 || don == -1)
@@ -90,9 +82,19 @@ int main(int argc, char *argv[])
 			dprintf(STDERR_FILENO,
 				"Error: Can't read from file %d\n", argv[1]);
 			free(buffer);
+			exit(98);
+		}
+
+		pau = write(toh, buffer, don);
+		if (toh == -1 || pau == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
+			free(buffer);
 			exit(99);
 		}
-	don = read(ono, buffer, 1024);
+
+		don = read(ono, buffer, 1024);
 		toh = open(argv[2], O_WRONLY | O_APPEND);
 
 	} while (don > 0);
@@ -102,6 +104,4 @@ int main(int argc, char *argv[])
 	close_file(toh);
 
 	return (0);
-}
-
-
+e}
