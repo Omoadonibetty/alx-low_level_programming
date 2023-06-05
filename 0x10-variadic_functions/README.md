@@ -1,1 +1,0 @@
-Variadac function
